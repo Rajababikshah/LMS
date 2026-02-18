@@ -23,12 +23,28 @@ export default function Navigation({ currentPage, setCurrentPage, userRole, onLo
           </button>
           <ul className={`nav-links nav-center${mobileOpen ? ' nav-mobile-open' : ''}`}>
             <li><button className={`nav-link${currentPage === 'home' ? ' active' : ''}`} onClick={() => { setCurrentPage('home'); setMobileOpen(false); }}>Home</button></li>
-            <li><button className={`nav-link${currentPage === 'courses' ? ' active' : ''}`} onClick={() => { setCurrentPage('courses'); setMobileOpen(false); }}>Courses</button></li>
             <li><button className={`nav-link${currentPage === 'about' ? ' active' : ''}`} onClick={() => { setCurrentPage('about'); setMobileOpen(false); }}>About</button></li>
+            <li><button className={`nav-link${currentPage === 'courses' ? ' active' : ''}`} onClick={() => { setCurrentPage('courses'); setMobileOpen(false); }}>Courses</button></li>          
             <li><button className={`nav-link${currentPage === 'contact' ? ' active' : ''}`} onClick={() => { setCurrentPage('contact'); setMobileOpen(false); }}>Contact</button></li>
           </ul>
           <ul className={`nav-links nav-right${mobileOpen ? ' nav-mobile-open' : ''}`}>
-            <li><button className="nav-link" onClick={() => { setCurrentPage('login'); setMobileOpen(false); }}>Login</button></li>
+            <li style={{ position: 'relative' }}>
+              <button
+                className="nav-link"
+                onClick={() => setProfileOpen(v => !v)}
+                aria-haspopup="true"
+                aria-expanded={profileOpen}
+              >
+                Login ▾
+              </button>
+              {profileOpen && (
+                <div className="login-dropdown" style={{ position: 'absolute', right: 0, top: '100%', background: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.15)', zIndex: 1000, minWidth: '160px', borderRadius: '4px', overflow: 'hidden' }}>
+                  <button className="dropdown-item" style={{ width: '100%', padding: '0.75rem 1rem', border: 'none', background: 'none', textAlign: 'left', cursor: 'pointer' }} onClick={() => { setCurrentPage('student'); setProfileOpen(false); setMobileOpen(false); }}>Student Login</button>
+                  <button className="dropdown-item" style={{ width: '100%', padding: '0.75rem 1rem', border: 'none', background: 'none', textAlign: 'left', cursor: 'pointer' }} onClick={() => { setCurrentPage('tutor'); setProfileOpen(false); setMobileOpen(false); }}>Tutor Login</button>
+                  <button className="dropdown-item" style={{ width: '100%', padding: '0.75rem 1rem', border: 'none', background: 'none', textAlign: 'left', cursor: 'pointer' }} onClick={() => { setCurrentPage('admin-login'); setProfileOpen(false); setMobileOpen(false); }}>Admin Login</button>
+                </div>
+              )}
+            </li>
             <li><button className="nav-link" onClick={() => { setCurrentPage('register'); setMobileOpen(false); }}>Register</button></li>
           </ul>
         </div>
